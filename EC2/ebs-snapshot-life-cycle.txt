@@ -1,0 +1,32 @@
+
+----------------------------------------------- EBS AUTOMATIC SNAPSHOT - Lifecycle Manager -------------------------------------
+
+* Lifecycle Manager in EBS :- this service makes Snapshots automatically as per policy.
+
+
+1)  Go to Lifecycle Manager policy under EBS.
+
+2)  Select Policy type as "EBS snapshot policy".
+
+3)  Select resource type as "Volume" :- where snapshot is going to created from (Instance/Volume).
+
+4)  Select Intended Volume from tag name (if no tag for volume, create the one), it will list all tags of vol in target volume option (can select multi vol).
+
+5)  Enter any Schedule name.
+
+6)  Frequency (when snapshot will be created) :- daily/weekly/monthly/yearly.
+
+      a)  daily         = snapshot will be created daily in given time
+      b)  weekly        = snapshot will be created in given week day(s)
+      c)  monthly       = snapshot will be created in given month, date & time
+      d)  yearly        = snapshot will be created once in a year in given month 
+
+7)  Enter prefferable time for snapshot (at given time the snapshot will be created)
+
+8)  Retain :- Enter a retain counting, it will keep backup as entered retain counting numbers, if no. goes beyond retain count, old backup will be deleted
+
+      EG. Retain counting is 3, it will take last 3 snapshot backups & deletes older snapshot backups
+
+
+
+            |---------------------------- New Snapshot will be created after 1 hr of creating Lifecycle Manager ---------------------------|

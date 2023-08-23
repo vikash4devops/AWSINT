@@ -1,0 +1,107 @@
+
+------------------------------------------------------------------------ ELASTIC BLOCK STORAGE ---------------------------------------------------------
+
+--> EBS is Persitent storage, it does not delete the data even after deleting instances (need to uncheck the deletion option on instance termination).
+--> EBS works in "Network attached storage (NAS)", means it stored in VPC level rather than Instance level.
+--> in EBS, data stores in blocks part (in indexes form).
+
+1) TWO  types of storage 
+  
+  a) Root/Boot Storage  => this is where instance's  OS installed. 
+  b) Non Root Storage   => here, it stores only data volumes.
+  
+ 2) one EBS volume can be attached with only one instance, it can't be attached with multiple instances at same time.
+ 
+ 3) EBS Volume and Instance must be within the same AVAILABILITY ZONE to attach.
+ 
+ 
+-------------------------------------------------------------------- EBS VOLUME TYPES ---------------------------------------------------------------
+ 
+  * There are THREE types of EBS Volumes
+ 
+  a) SSD (Solid State Drive) Type :- it is a bootable drive, here OS can be installed (root drive volume - C drive).
+  
+    i)    General Purpose SSD (gp2)             :-  this is default instance volume (8gb for free t2.micro).
+          ->  performance measured in IOPS
+          ->  high performance, low latency
+          ->  volume size :- 1GB to 16TB
+          ->  IOPS Ratio  :- 3 IOPS/GB upto 10,000 IOPS
+          ->  Charges     :- $ 0.10 /GB /Month
+          
+    ii)   Provisioned IOPS (io1)
+          ->  high performance, low latency
+          ->  it is designed & used for large scale volumes storage, i.e large RELATION or NoSQL databases.
+          ->  volume size :- 4GB TO 16TB
+          ->  Charges     :- $ 0.125 /GB /Month
+    
+  b) HDD (Hard Disc Drive) Type  :- it is a non-bootable drive, here OS can't be installed (use to add additional volume- D/E/F drive).
+  
+    i)    Throughoutput (mbps) optimized HDD (st1)
+          ->  performance measured in MBPS
+          ->  used for frequently data access
+          ->  used for Big Data, Data Warehouses ie. big data volume
+          ->  volume size :- 500GB TO 16TB
+          ->  Charges     :- $ 0.045 /GB /Month
+          
+    ii)   Cold HDD (sc1)
+          ->  used for infrequently data accessed
+          ->  lowest cost volume storage
+          ->  volume size :- 500GB TO 16TB
+          ->  Charges     :- $ 0.025 /GB /Month
+  
+  c) Magnetic Standard            :- it is a bootable drive, here OS can be installed (root drive volume - C drive)
+          ->  (its kind of old volume type, by def. AWS doesn't reccommend it)
+          ->  used for infrequently data accessed
+          ->  volume size :- 1GB TO 1TB
+ 
+ 
+
+-------------------------------------------------------------------- EBS SNAPSHOTS (copy of a volume) ---------------------------------------------------------------
+
+1)  Maximum 5,000 EBS Volumes can be created in aws account.
+
+2)  Maximum 10,000 EBS Snapshots can be created in aws account.
+
+3)  EBS Volumes are AVAILABILITY ZONE Specific.
+
+4)  EBS Snapshots are REGION Specific.
+
+5)  EBS Snapshots are stored in S3 Bucket.
+
+6)  New Volume can be created from EBS Snapshot (Across Region).
+
+7)  EBS Volume size and its Snapshot size would be equal.
+
+8)  If new EBS Volume is created from a Snapshot, then that creating EBS volume size must be equal or greater than Snapshot size.
+
+9)  HOW to Migrate an EBS volume from one AZ-1 to another AZ-2.
+
+    a)  take Snapshot of AZ-1 EBS Volume & create EBS Volume from that Snapshot in another AZ-2 (since Snapshots are REGION Specific).
+
+10) we can take Non-Root EBS Volume Snapshot in Running State (Instance state)
+
+10) we can't take Root EBS Volume Snapshot in Running State (Instance state), we must stop instance    
+
+
+
+-------------------------------------------------------------------- EBS ENCRYPTION/DECRYPTION ---------------------------------------------------------------
+
+1)  Encrypted EBS Volume's Snapshot will also be Encrypted (vice-versa for un-encrypted).
+
+2)  If a Snapshot is Encrypted and a new EBS Volume is created from that Snapshot, then EBS Volume will also be Encrypted (vice-versa for un-encrypted) .
+
+3)  Encrypted & Un-encrypted volume can be attached in same instance.
+
+4)  How to Encrypt an existing un-encrypted volume (non-root volume)
+
+      a)  Create a new EBS Volume and mark that as encrypted and attach this volume to Running instance & copy old volume (un-encrypted) data to this new encrypted volume
+
+      b)  2nd way
+            ->  Take a Snapshot of un-encrypted (existing) volume.
+            ->  make a copy of this new created Snapshot and mark as encrypted.
+            ->  now create new EBS Volume by this newly encrypted Snapshot.
+            ->  attach new encrypted volume to Running instance.  
+
+4)  How to Encrypt an existing un-encrypted volume (root volume)
+
+      a) Make AMI of intended instance and create new instance with this AMI, now mark as encrypted to root volume while creating instance.

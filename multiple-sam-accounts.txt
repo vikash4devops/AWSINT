@@ -1,0 +1,15 @@
+
+1)  SAM Account - Small Account Model which comes under AWS organization service.
+
+
+2)  Add multiple Account (Dev, Stage) within the master (Main) account.
+
+
+3)  How to add SAM account password
+    
+    - when account is created successfully, go to the console login and forgot password & make the new password.
+    
+    
+4)  Never create any resource within the Master account (main), 
+    
+    - here only should have consolidated billing details and cloudwatch details so that all the SAM accounts can be monitored within this main ac.   

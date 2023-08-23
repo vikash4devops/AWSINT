@@ -1,0 +1,42 @@
+
+-------------------------------------------------------------------- ATTACH NEW EBS VOLUME ---------------------------------------------------------------
+
+1)  Creats EBS Volume :- EC2/Volumes
+      -> select same AZ as intended instance has
+
+2)  Attach Volume with Instance (intended instance)
+
+3)  Login to (console) intance & do following steps :
+
+      -> very first, check  attached Volume list (mounted & non-mounted) :- lsblk 
+
+      a)    df -h (list all volumes which are mounted with some drive/dir)
+
+      b)    check if new EBS Volumes (xvdf) is in filesystem format (below command), volume must be in filesystem format for mounting
+            ->  sudo file -s /dev/xvdf
+
+      c)    if above command returns "data", then it is not filesystem yet, need to make it filesystem :- 
+            ->  sudo mkfs -t xfs /dev/xvdf
+
+      d)    now, check is it filesystem now, 
+            ->  sudo file -s /dev/xvdf -> it should return like "/dev/xvdf: SGI XFS filesystem data" if it is filesystem
+
+      e)    now, mount EBS Volumes filesystem with any dir using below command
+            ->  sudo mount /dev/xvdf your/project/dir/path
+
+4)  Now, df -f, new EBS Volume should be listed with its volume size    
+
+
+----------------------------------------------------------------- MAKE SNAPSHOT & CREATE NEW VOLUME ---------------------------------------------------------
+
+1)  Take snapshot of existing EBS Volume
+
+2)  Create new EBS Volume with this snapshot
+
+3)  Attach this New Volume with Instance
+
+4)  Check its filesystem, it must be a filesystem (should return -  /dev/xvdf: SGI XFS filesystem data)
+
+5)  Attach any drive/dir with this volume
+
+6)  Old project (data) would be there in mounted dir with this volume

@@ -1,0 +1,28 @@
+1)  Jump to next if any error occurs in Ansible (playbook should not stop)
+      ignore_errors:True/False
+
+
+2)  How to run task in local (master) machine
+      using condition, if condition says run into local machine, or run into remote machine (run wisely)
+      
+     Run Task on Local https://docs.ansible.com/ansible/latest/user_guide/playbooks_delegation.html#delegating-tasks
+     
+     
+     ================ Playbook ===========================
+     
+     - name: Run task on local & target machine
+  hosts: all
+  become: true
+  tasks:
+    - name: create file on remote machine  
+      file:
+        path: abc.txt
+        state: touch
+    - name: create file on localmachine
+      become: false
+      local_action:  //run task on local machine
+        module: file // module name
+        path: local.txt
+        state: touch
+         
+  

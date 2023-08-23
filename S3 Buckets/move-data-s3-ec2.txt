@@ -1,0 +1,20 @@
+Imp :- Set S3 Full Permission to EC2 machine -> action -> instance settings -> attach roles -> s3FullAccess
+
+1)  Create an User get aws key and secrete id, then login via aws configure
+
+2)  Copy from S3 to EC2
+
+    i) Copy a single object from S3 bucket
+        aws s3 cp s3://bucketname/filename /ec2-dir
+
+    ii) Copy all the object from S3 bucket
+        aws s3 sync s3://bucketname/filename /ec2-dir --recursive
+
+3) Copy From EC2 to S3
+
+    i) Copy a single file from EC2
+        aws s3 cp /ec2-dir/filename s3://bucketname/filename 
+
+    ii) Copy multiple Files/Folder from EC2
+        aws s3 sync /ec2-dir s3://bucketname/filename
+

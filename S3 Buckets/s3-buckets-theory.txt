@@ -1,0 +1,51 @@
+************************************************* S3 BUCKET THEORY **************************************
+
+1)  Max Capacity of one S3 bucket is 5TB
+2)  When a bucket is created, AWS by default keeps 2 other copies of that bucket for backup purpose.
+3)  S3 is object based storage -> any kind of large object can be stored.
+4)  You can't create a nested bucket (bucket inside a bucket)ie.
+5)  S3 bucket is region specific (global region) (can be multiple AZs).
+6)  S3 bucket ownership can never be transffered.
+7)  You can have upto 100 buckets per account (may be extended upto 1,000 on request to AWS).
+
+
+********************************************** S3 BUCKET NAMING RULES ************************************
+
+1)  Bucket name must be globally unique and must not contain spaces or uppercase letters (can't be hiphen (-) on start or end of name ),
+2)  (min -> 3- max -> 63) name characters.
+
+
+********************************************** S3 BUCKET SUB RESOURCES ************************************
+
+1)  LIFESTYLE
+    i) eg. there is data which we can transfer to other S3 service ie. GLACIER, S3-IA into a specific time (eg after 30 days, 90 days).
+
+2)  WEBSITE 
+    i) a static website can be hosted into S3 Bucket.    
+
+3)  VERSIONING
+    i)   keeps object history as it changes (it keeps the latest file into bucket, but while open it, there will a list of file uploaded times as defferent versions of it) .
+    ii)  versioning can't be DISABLED , it can be ENABLED OR SUSPENDED (*imp.) 
+
+4) ACCESS CONTROL LIST (POLICIES)
+
+
+********************************************** S3 BUCKET URL EG. *****************************************
+
+eg url -> https://s3-ua-west1.amazonaws.com/bucketname/filename.any
+
+        i) it starts with region name, amazonaws.com is fixed, then bucketname and filename.
+
+
+********************************************** S3 BUCKET CREATION WITH VERSIONING *****************************************        
+
+1)  Enter bucket name 
+
+2)  Choose region
+
+3)  Bucket settings for Block Public Access (PUBLIC ACCESS settings) ["it can be changed after bucket creation either"]
+
+4)  Bucket Versioning (Disabled / Enabled) ["it can be changed after bucket creation either"]
+
+5)  After bucket created, now set the PERMISSIONS
+    

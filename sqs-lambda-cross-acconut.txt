@@ -1,0 +1,40 @@
+
+** Purpose of adding SQS event on Lambda function is that, whenever there is new request in SQS, lambda will be triggered **
+
+Demo ===> 
+      Account-A (Lambda Function)
+      Account-B (SQS)
+      
+      
+      
+
+1)  Add these policies in SQS
+
+      {
+       "Version": "2012-10-17",
+       "Id": "Queue1_Policy_UUID",
+       "Statement": [{
+          "Sid":"Queue1_AllActions",
+          "Effect": "Allow",
+          "Principal": {
+             "AWS": [
+                "arn:aws:iam::524544374385:role/my-lambda-sqs-role"
+             ]
+          },
+          "Action": "sqs:*",
+          "Resource": "arn:aws:sqs:ap-south-1:382544361070:myNew-Queue"
+        }
+      ]
+    }
+
+
+------------------------------------------------------------------------------------------------------------------------------------------
+my-lambda-sqs-role      ==> this is the role of Lambda function (Account-A)
+myNew-Queue             ==> this is the name of SQS (Account-B)
+------------------------------------------------------------------------------------------------------------------------------------------
+
+
+2)  Run below from aws cli to bind the services (Lambda Event as SQS)
+
+aws lambda create-event-source-mapping --function-name myNewLambda --batch-size 10 \
+--event-source-arn arn:aws:sqs:ap-south-1:382544361070:myNew-Queue

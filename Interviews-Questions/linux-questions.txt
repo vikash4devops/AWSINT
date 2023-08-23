@@ -1,0 +1,135 @@
+
+1)    How to check Memory space
+
+      free -h
+
+
+2)    How to replace a particular keyword from a file from command line.
+
+      sed -i s/o/r/g file.txt
+
+      eg. sed -i s/original_key/replaced_with/g
+
+      sed = stream editor, i = in-place, s = substitue, o = original, r = replaced with, g = globally
+
+
+
+3)    How to count a particular word across the filesystem
+
+            grep -r "word" test-folder | wc
+            
+
+
+4)    How to check nginx syntax if its ok or error
+      
+            nginx -c /etc/nginx/nginx.conf -t         (-c is configuration file and -t is test flag)
+            
+         
+5)   What is Inode in linux?
+      
+      Inode is indexing of every file and directory, it keeps records of files and folders ie. file type, file size, location etc...
+      so whenever a file or directory creates the inode also creates automatically.
+      
+  
+6)   How to check Inode list
+      
+      df -i
+      
+     
+7)    What is Soft link & Hard Link in linux?
+
+       Soft Link & Hard link is a pointer of an original file where we can make a kind of shortcut to access the original file.
+       using this links we create a kind of copy of original file, so whenever we write or update anythin in original file
+       it will auto update the linked file.
+       
+       a) Soft Link
+       
+           command to create: ln -s original_file_path soft_link_path
+           
+          Imp*:- soft link Inode and original file Inode is different, so if the original file gets deleted the soft link file 
+                  become useless and it delete the orignal file details.
+            
+            
+       b) Hard Link
+            
+            command to create: ln original_file_path hard_link_path
+            
+            Imp*:- hard link Inode and original file Inode is same, so if the original file gets deleted the hard link file 
+                   details does not delete it stay persist.
+                   
+               
+8)    How to check Inode number of a file
+      
+      stat filename
+      OR
+      ls -i (list all file/folder inode numbers)
+      
+   
+9)    How to disable/enable password authentication in ssh 
+
+      /etc/ssh/sshd_config          #PasswordAuthentication yes_or_no
+      &
+      sudo restart ssh
+
+10)   posted and threads
+
+11)   Load Average in Linux
+
+      Load average is static of CPU utilization and loadings, it gives 3 statics ie. 0.12, 1.54, 2.45 
+      (first static is CPU average load for last 1 minute, second is for last 5 minutes, third is for last 15 minutes)
+      here 1 calculates as 100% for single core CPU, if its double core CPU, then it will be calculated as 50%, so 
+      load average depends upon CPU cores, suppose we single core CPU and load average is 1 then its 100% loaded and other request will be on queue.
+      
+      * Below are the commands to get load average -
+         a) top
+         b) cat /proc/loadavg
+      
+      * Below command to check how many CPU cores in machine -
+            cat /proc/cpuinfo
+      
+
+12)   How to change a user home directory
+      
+      use below command to change
+      
+            usermod -d newpath/username username
+       
+       now, list the user and check the home dir.
+       
+            cat /etc/passwd
+            
+
+13)   How to kill a process
+
+      So, the purpose of kill any process is if it does not stop after a certain request or process then we need to kill that process forcefully,
+      so, there are 64 ways of killing the process for different purposes.
+      
+      command to check the ways of kill processes
+            kill -l           (will list all 64 kill processes)
+            
+      eg of kill process:- lets create a sleep process by command which runs in background, and will kill that
+      
+            sleep 500 &       (& used to run process in background)
+            
+        now, list of the running processes
+        
+            ps -l             (it list all running process with uid, pid, ppid, lets eg sleep process pid is 320)
+            
+        kill the process
+        
+            kill 320          (it will terminate the sleep process)
+
+      when we use kill command to kill process it use 15th number of killing process which terminates the process from terminal,
+      if the process still does not delete then we can use 9th number of killing process which will called to directly kernal 
+      and process will be killed anyhow.
+      
+      
+14)   How to check a file/folder size in linux?
+            
+            du -sh /file_or_folder_name
+
+
+15)   List the files/folders which is modified 20 days ago or within.
+
+            find . -mtime +20             (will list the files modified 20 days ago..)
+            find . -mtime -20             (will list the files modified within 20 days)

@@ -1,0 +1,15 @@
+********************** open cron & run a shell script file through it *****************
+
+ 1) crontab -e (hit enter)
+ 2) * * * * * /bin/sh /home/ubuntu/takesqlbk.sh #(run this file every minute)
+
+*********************** take sql-dump from sql db & store into a folder and auto backup into s3 bucket (a shell file) ***************
+
+rm /tmp/mysqlbk/*.sql #(removes all the older sql files from this folder)
+
+mysqldump -u root -pvshiva2020 test > /tmp/mysqlbk/backup_$( date '+%Y-%m-%d_%H:%M:%S' ).sql #(creates sql-dump file from given db with date_time filename, "test" is db name)
+
+aws s3 rm --recursive s3://mysqlbk-shiva/ 	#(removes other older sql files from s3 bucket)
+
+aws s3 cp /tmp/mysqlbk/*.sql s3://mysqlbk-shiva		#(copy new file from ec2 machine and takes to s3 bucket folder)
+

@@ -1,0 +1,28 @@
+********************************************************************** THEORY ********************************************************************************
+ELB :- ELASTIC LOAD BALANCER;
+
+1) Load Balancer distribute the web traffic to the available servers, this is a region specifc (it handles only single region at once).
+
+2) Three (3) Types of Load Balancer :- (i) Application Load Balancer, (ii) Network Load Balancer, (iii) Classic Load Balancer
+
+    i)   Application LB :- (works on 7th Layer) this increase the availability of applications (i.e fast application), it supports protocols - HTTP/HTTPS
+    ii)  Network LB     :- (works on 4th Layer) this LB used when there are multiple request in single time, it handles very effectively the multiple requests and response quick, it supports - TCP/UDP/TLS
+    iii) Classic LB     :- (works on 4th & 7th Layer both) it supports protocols - HTTP/HTTPS/TCP/SSL, and - IPV4, IPV6 & DUAL
+
+
+3) How Load Balancer Works :- it generates DNS (a kind of public accessable IP Address) and it transffers the requests to connected ec2 private IP Addresses (only to connected ec2)   
+
+4) ELB is hourly charable, eg if we use it for 10 minutes it charges for 1 hr.
+
+5) If we delete the ELB :- those EC2 instances will not be deleted which created by ELB on different availability zones.
+
+6) ELB can be connected with only single subnet in one Availability Zone.
+
+7) Min 8 Ips must be for ELB, min of 8 IPs CIDR is  eg :- 127.0.0.0/27 (32-27 = 5 -> 2*2*2*2*2 = 32 IPs, 8 IPs are reserved for ELB, and other 5 reserved for AWS, so 19 IPs are available ).
+
+8) HEALTHY & UNHEALTHY THRESHOLD :- it depends upon "Response time-out", "Health Interval Time", & "Periodic Range", eg given below
+    :- eg, we have set "Response Time-Out" as 5s, "Health Interval Time" as 30s & "Range" as 3 :- Now, in every 30 Sec response will send via Ping (HTTP PING) and if for 3 consecutive times response doesn't come within 5 sec then THRESHOLD (EC2 machine) will considered as "UNHEALTHY".
+
+9) Maximum 200 Target Group (per availability zone) can be associated in a group.
+
+10) Listeners :- it is the process that checks for connection request, each Network ELB needs atleast one Listener to accept traffic.

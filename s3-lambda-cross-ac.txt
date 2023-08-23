@@ -1,0 +1,27 @@
+Flow:
+
+AC1 -->> Lambda
+
+• Create a lambda function, add resource based policy, choose “S3 Service”, choose S3 from dropdown and add S3 account no and its ARN (AC2 id).
+• Lambda Action: Choose Lambda:InvokeLambdaFunction
+
+
+AC2 -->> S3
+
+• Create a S3 bucket, go to property, add ‘Event notifications’, select ‘Object creation’ as put.
+• Specify lambda function ARN (AC1 Lambda ARN), save
+
+Test
+
+• Upload a new object in S3, it should trigger lambda and check lambda monitoring part there should be log printed.
+
+
+How to add cross role and role assuming:
+• Create a new role (could be existing too) on AC1 (S3 AC) which will have permission of acess the S3 (get, list, put etc).
+• Assume lambda function role (AC1 ROLE) on this S3 role (trust relationship).
+• Create a new policy on AC1 Lambda function's role to assume the role of S3 Role.
+
+
+
+Note: on lambda function, there is method called handler which is a file name and will be called while triggering lambda (code).
+	  just update is like: test.lambda_handler	(“test” is custom created file name).

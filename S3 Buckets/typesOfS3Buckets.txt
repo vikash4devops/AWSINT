@@ -1,0 +1,24 @@
+----------------------------------- S3 BUCKETS TYPES --------------------------------
+
+1) OBJECT STORAGE (S3 Standard)
+    a) can store any types of data ie. -> music, text, sql, video etc. as a single object.
+    b) object data's name should be globaly unique (unique name).
+
+2) S3 INFREQUENT ACCESS (IA) :- it is a bit costly then S3 common storage while retrieving, but it is less costly for keeping data. So if data is not frequently retrievable, it can be used.
+
+3) S3 ONE-ZONE 
+    a) we can keep data which is not very much important, because, AWS doesn't keep its other 2 copies in this service (generally, AWS keeps 2 other data's copies in different AZs in other S3 Services).
+    b) because of one zone data only, it costs less than others.
+
+4) S3 EFS (ELASTIC FILE SYSTEM)
+
+5) S3 EBS (ELASTIC BLOCK STORAGE) 
+    a) it stores as divided data as chunk part data (block part) and it connected with ec2 machine.
+    b) block storage doesn't contain metadata of each block indexes, but it keeps whole data's metadata. (METADATA -> about filesize, filename, filetype, file origin etc.)
+
+6) S3 GLACIER -> it used to store big unused (not frequently used, 1-2 times in year) data, it costs too low.
+
+7) S3 DEEP GLACIER -> it used to store big unused (not much frequently used, 1-2 times in 1-2 years) data, it costs too low.
+    a) it charges as per GB while retrieving data (no charge while uploading), so if it used as stardard S3 bucket (very frequently), then charges will be high (as per GBs)
+
+8) S3 SNOWBALL -> Snowball is a petabyte-scale data transport solution that uses secure appliances to transfer large amounts of data into and out of the AWS cloud.

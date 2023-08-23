@@ -1,0 +1,21 @@
+* APPLICATION LOAD BALANCER :- IT WORKS MODULE WISE (PRODUCT PAGE / ORDER PAGE), WE CAN CREATE A SEPRATE LOAD BALANCER FOR HIGHLY USED MODULE OF OUR APPLICATION       USING "APPLICATION LOAD BALANCER" 
+
+* WE CAN USE SAME EC2 INSTANCE WHERE PROJECT IS RUNNING, AND IN APPLICATION LOAD BALANCER WE CAN CHOOSE MODULE AND CREATE APPLICATION LOAD BALANCER
+
+* EG APPLICATION LOAD BALANCER :- a) yourproject/product/* b) yourproject/order/* :- now, for these two module a seprate load balancer creates that called "ALB"
+
+* LOAD BALANCER WORK UPON AVAILABILITY ZONES, ATLEAST 2 SUBNETS SHOULD BE SELECTED TO CREATE LB.
+ 
+* TAGET GROUP :- IT IS A GROUP OF TARGETS (EC2 INSTANCES) WHERE LOAD WILL BE DISTRIBUTED.
+
+
+1) (Go to => Load Balancing -> Load Balancer) Configure Load Balancer => choose Application Load Balancer, Specify a LB name, add listner (HTTP/HTTPS)
+2) Select Availability Zones = only selected AZ's EC2 instances will be targetted as Load Balancer instances (for ref. check Availability Zones of created instances).
+3) Select Configure Security Group
+4) Configure Routing => Here, we Specify the taget group names etc.
+5) Register Targets => Add Targets (EC2 instances) where loads will be distributes.
+    Now, load Balancer is created.
+
+*ADD/REMOVE INSTANCES/AZs AFTER LOAD BALANCER CREATED.
+    i)  For adding instances => go to > taget group -> tagets -> edit the instances (remove / add).
+    ii) For adding AZs => go to > load balancer -> Edit subnets -> now check/uncheck the AZs.

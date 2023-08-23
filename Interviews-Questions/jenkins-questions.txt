@@ -1,0 +1,11 @@
+1)  Active Choice/R-active Choice Parameter Job
+
+2)  Remove old builds accross multiple job (to make space free)
+
+3)  Take Jenkins Backup & clean Workspace
+
+4)  How to migrate jenkins from one server to another
+
+5)  How to run multiple jobs after a job success
+
+6)  Where to put a common variable value to use into different builds

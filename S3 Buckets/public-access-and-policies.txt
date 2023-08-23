@@ -1,0 +1,68 @@
+****************************************************** S3 BUCKETS PUBLIC ACCESS AND POLICIES ***********************************
+
+1) MAKE S3 BUCKETS PUBLIC 
+
+    i)   select a bucket, go to "PERMISSION" tab, make block public access to "off"
+    ii)  Under Permission -> go to Bucket policy and make policy as per requirement, for eg below json policy for making it publicly readable.
+
+        {
+        "Version":"2008-10-17",
+        "Statement":[
+            {
+                "Sid":"AllowPublicRead",
+                "Effect":"Allow",
+                "Principal": {
+                    "AWS":"*"
+                },
+                "Action":"s3:GetObject",
+                "Resource":"arn:aws:s3:::yourbucketname/*"
+            }
+            ]
+        }
+
+Note: star { and end } brances should not be any gap in line (shoudl be at starting point at line)
+
+2) ALLOW S3 BUCKET POLICY FOR AN USER
+
+    i)   go to Permission -> Policy Generator
+    ii)  select Policy type :- S3 Bucket Policy
+    iii) select Effect (Allow / Deny)
+    iv)  Principal (user arn who policy Generate for)
+    v)   Actions (What actions user can be performed)
+    vi)  Add Statement & Generate Policy
+    vi)  Amazon Resource Name (ARN) - Bucket ARN, eg - arn:aws:s3:::bucketcsv17jan (put * (/*) so that policy will apply for all objects of this bucket)
+
+    EG. POLICIES
+
+    {
+        "Id": "Policy1611983140022",
+        "Version": "2012-10-17",
+        "Statement": [
+            {
+            "Sid": "Stmt1611983139075",
+            "Action": [
+                "s3:GetObject",
+                "s3:ListBucket"
+            ],
+            "Effect": "Allow",
+            "Resource": "arn:aws:s3:::bucketcsv17jan/*",
+            "Principal": {
+                "AWS": [
+                "arn:aws:iam::175463268949:user/Shiva"
+                ]
+            }
+            }
+        ]
+    }
+
+    Now, Create users as per policy
+
+
+3) LIFE CYCLE S3 BUCKET
+
+    i)    go to Managment ->  Create Lifecycle
+    ii)   Rule Scope -> for all objects
+    iii)  Lifecycle rule actions :- tick to (Transition current versions of objects between storage classes) & (Transition previous versions of objects between storage classes)
+    iv)   create Transitions with atleast 30 days gap.
+    
+    Note:- "Glacier Deep Archive" must be more than 90 days of "Glacier".     

@@ -1,0 +1,72 @@
+**************************************************************** SQL (RELATIONAL DB) **********************************************************
+
+Note :- tables has relations with each others
+
+1) TYPES OF SQLs
+    i)   MySQL      (supports upto 64 TB)
+    ii)  MariaDB    (supports upto 64 TB) 
+    iii) PostreSQL
+    iv)  AWS Aurora
+
+
+2) There are 2 Types of Autoscaling
+    i)   Horizontal Scale In / Scale Out      :- where machines can be increased or decreased as per use.
+    ii)  Vertical Scale In / Scale Out        :- where machines storage can be increased or decreased as per use.
+
+3) In Relational Databases Vertical Scale In / Scale out is possible.
+
+4) It use for Provisional IOPS RDS storage
+    i)  For High Performance OLTP Workload (Online transaction load type) (i.e banks)
+    ii) IOPS Limits :- Min 100GB, Max 16,384GB
+
+4) Liscens (2 Types of Liscens)
+    i)  BYOL            :- Bring your own liscens.
+    ii) AWS Liscens     :- AWS Provides liscens on own based, which it charges in hourly based.
+
+**************************************************************** NoSQL (NON-RELATIONAL DB) **********************************************************
+
+Note :- tables doesn't have any relations with each others
+
+1) TYPES OF NoSQLs
+    i)   Mongodb            :- document based  
+    ii)  Dynamo DB          :- key / value pair 
+    iii) Colomner DB        :- data stores into colomn types (all data into single colomn)
+    iv)  Graph Based DB     :- data represented as graphically
+
+2) In Non-Relational Databases Horizontal Scale In / Scale out is possible.
+
+3) It use for General Purpose IOPS RDS storage
+    i)  For High Performance OLAP Workload (Online analytical processing)
+    ii) IOPS Limits :- Min 20GB, Max 16,384GB
+
+
+************************************************************************ RDS *************************************************************
+
+1) RDS use EBS Volume for storage (Elastic block storage) *(imp)
+
+2)  AWS takes DB Backup for every 30 Minutes
+
+3)  Two Types of Db Backups
+
+    i)   StandAlone Replica  :- No Replica (No other backup)
+    ii)  StandBY Replica     :- Replica will be availabe in another AZ (In same region, No other region can be selected)
+
+
+4)  Upto 40DB Machines (instances) per account.
+
+
+***************************************************************** AZ in RDS ***************************************************************
+
+1) While Creating RDS, we need to Select Multi AZ so, another replica (StandBY Backup) can be done in any other AZ.
+    i)    StandBY Backup :- if primary server is down, StandBY server will be up (StandBY server becomes primary).
+    ii)   Replica will be availabe in another AZ (In same region, No other region can be selected)
+    iii)  We can't select a specific AZ while creating RDS, but it will be visible once its created (only readable model).
+
+2) If we don't Select Multi AZ while Creating RDS, it can't be selected after being created.
+
+3) CNAME (Canonical Name Record) in RDS DB
+    i)   kind of DNS (common URL for diff IPs)
+    ii)  Primary Server & StandBY Server are different server and have different IP Addresses and there would a CNAME in which both server IP addressess will be stored.
+    iii) So, that if any server is down, we don't need to specify any server IP address to EC2 Machine, just put CNAME there, it will auto catch working up server's IP address
+
+

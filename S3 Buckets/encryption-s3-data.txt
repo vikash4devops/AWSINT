@@ -1,0 +1,38 @@
+######################################################### THEORY (IMP) ###################################################
+
+*IMP :- THERE ARE 2 TYPES OF DATA ENCRYPTION
+        i)   Server-Side Encryption  :- Encrypted by Amazon S3
+        ii)  Client-Side Encryption  :- Encrypted by Client (Manually)
+
+
+    Encrypted data is secured data, no unauthorised request can harm it.    
+
+1)  Where to put data-encryption in S3 :-
+
+    i) There are 2 Types of data protections   
+
+        a) Data in-transit (when data is travelling TO Amazon S3 or FROM Amazon S3 - while uploading/downloading) :- data is already protected by SSL (Secure Socket Layer).
+        b) Data at rest (when data is stored in Amazon S3)
+
+2) DATA AT REST by SERVER-SIDE ENCRYPTION
+
+    There are 3 typs of Server-Side Encryption (SSE):
+
+        a)  SSE-S3  (Amazon S3-Managed Keys)
+            i)   Amazon S3 will use own CIPHER keys while uploading data.
+            ii)  keys can't be changed once it applied.
+
+        b)  SSE-KMS (Customer Master Keys)
+            i)   its much higher lever keys than SSE-S3.
+            ii)  keys will change after a certain period of time after uplaoding (it keep changing).
+
+
+        c)  SSE-C  (Customer-Provided Keys) 
+            i) Amazon S3 doesn't provide it, Customer need provide own keys.
+
+######################################################## HOW TO USE #########################################################
+
+1)  Set Encryption on Object
+        select an object -> properties -> Server-side encryption settings -> enable -> SSE-S3 OR SSE-KMS
+
+2)  Same for Bucket Encryption    

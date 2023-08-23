@@ -1,0 +1,8 @@
+************************************************* SQL INSTALLATION *************************************
+    use below link -
+    https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-18-04
+
+
+*********************************************** PHPMYADMIN INSTALLATION *******************************
+    use below link -
+    https://www.tecmint.com/install-lemp-with-phpmyadmin-in-ubuntu-20-04/

@@ -1,0 +1,122 @@
+
+1)    Can you tell something about docker container ?
+
+        i)    Docker container is bundle of an application with all its depencies, packages which need to run an application.
+
+        ii)   docker containers main aim is to get rid of infrastructure depencies while deploying the application to any plateform.
+
+
+2)    What is Docker Image ?
+
+        i)    this is main bundle of an application with all its depencies and packages and we create a container by this image.
+
+
+3)    What is Dockerfile ?
+
+        i)    it is a text file where we write our docker related things, like pulling an image from dockerhub, installing softwares & run some command into that image.
+              basically, it used to build an image as per specifications.
+
+4)    What is Hypervisor?
+
+        i)    it basically a functionality used to Monitor in virtualization to its Operating System(s) (OS1, OS2, OS3).
+
+        ii)   2 types of Hypervisor :- a) Native Hypervisor   b)  Hosted Hypervisor
+
+
+5)    What is Docker Compose ?
+
+        i)   it is a YAML file which consist various services regarding docker like we can run multiple containers with all mounting volumes, we can bind up volumes with multiple container
+            based application in single go.
+
+6)    On what circumstances will you lose data stored in a container ?
+
+        i)   if a container gets deleted then we can lose data if we haven't mounted them with a drive/dir.
+
+
+7)     What is docker image registry ?
+
+        i)    this is the place where docker images are stored, it could be either private registry OR public registry like dockerhub we say.
+
+
+8)     How many Docker components are there ?
+
+        i)    Docker Client     :-  this component perform "Build" and "Run" operations and create connections with docker host.
+
+        ii)   Docker Host       :-  this component has main docker daemon service which establishes connections with docker registry.
+
+        iii)  Docker Registry   :-  this component stores the docker images, it could be either PRIVATE or PUBLIC registry.
+
+        eg -> we hit "Docker Build" command   -> now, docker host service called daemon starts working and do communication with registry & pull the images   -> registry has main image.
+
+
+9)     COPY vs ADD in Dockerfile
+
+          i)    they both use to copy files and directories into destination,
+                but using ADD we can also store any package URL as source and it will download that package in destination
+                also ADD method extract any "tar" file in destination.
+
+
+10)    RUN vs CMD
+
+          i)    both method gives instruction to install or update any package in Dockerfile
+
+                RUN :- it gives instruction to install or update any package for IMAGE  (image level)
+                CMD :- it gives instruction to execute any default commands inside a CONTAINER of that IMAGE (it doesn't instruct to image, but to container)
+                        if instructions are multiple then CMD use array form like CMD ["command1", "command2"] and takes last elemenent instatructions
+
+
+10)    Docker save & Docker Export & Docker load & Docker import
+
+          i)    docker save     :-  it used to export or save an image in tar file format.
+                docker save do save image history (image modification history with its Metadata ie. tag versions)
+
+          ii)   docker export   :-  it used to export a container but it doesn't save its metadata and history
+
+          iii)  docker load     :-  it used to import (build) images from a file (tar), it stores with tags versions of image
+
+          iv)   docker import   :-  it used to import (build) images from a file (tar), it doesn't store any tag versions of image
+
+
+
+11)    CMD vs ENTRYPOINT
+
+        i)    CMD               :-  it instructs to container to execute a default command to container and default command can be easily overrider later.
+
+        ii)   ENTRYPOINT        :-  it also used to instruct to execute command to container, but this command can't be override,
+                                    use --entrypoint flag to override its command
+
+
+ 12) ENV vs ARGS
+
+        Both used to set environment variables in Docker.
+
+        i)    ENV               :-  this environment variable used to set value in image level, but values persist in container as once image is built
+                                    we can see those ENV values using "env" command inside container.
+                                    ENV NAME=John (in command line -e NAME=John)
+
+
+        ii)   ARGS              :-  this variable used to set value in image level, ARG values are not available after the image is built (values not persistent).
+                                    In the running container you can’t access the ARG variables.
+                                    ARG NAME=John   (in command line --build-arg NAME=John --build-arg AGE=28)
+
+
+13) CMD & Entrypoint in same dockerfile, what will happen and which one will run
+
+        a)    Only Entrypoint command will be run. 
+
+
+
+
+ 13) image optimization
+
+ 14) private key in sonarqube
+ 
+ 15) Types of Networks in Docker
+ 
+        Default Docker Network Driver is Brige, we can even create custom networks.
+        *imp :- if 2 containers are on same network but we didn't specify the name while creating, then it will communicate via IP address, but if we specify
+                name while creating, then containers can communicate via its name as well.
+                
+            
+ 16) What if there are multiple CMD methods in Dockerfile
+        it will give an error, since multiple CMD is not allowed.

@@ -1,0 +1,21 @@
+1) Install VSftpd = sudo apt-get install vsftpd
+2) After installing, it "vsftpd" its conf file stores into "etc" folder
+3) Open "vsftpd.conf" (etc/vsftpd.conf)
+4) Apply Below Changes into conf file
+
+	i)   anonymous_enable=NO	
+	ii)  write_enable=YES 		(uncomment this)
+	iii) chroot_local_user=YES 	(uncomment this)
+	iv)  allow_writeable_chroot=YES`(add this line, so user can write on given permission folder)
+
+5) Add below commands for enabling address & ports
+	i)   pasv_enable=YES
+	ii)  pasv_min_port=1024
+	iii) pasv_max_port=1048
+	iv)  pasv_address=54.83.84.155 	(instance public IP address)
+
+6) Restart vsftpd service = "service vsftpd restart"   
+7) Add an user = useradd kartik
+8) Set user permission to a specific foler =  sudo usermod -d /var/www/project2 -m kartik
+9) Give this foler a full permission = sudo chmod -R 777 /var/www/project2
+10) Give user group's permission to a specific folder = sudo chown -R kartik:www-data /var/www/project2  ("ls la" for more info)

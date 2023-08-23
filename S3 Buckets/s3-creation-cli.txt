@@ -1,0 +1,20 @@
+************************************************************* HOW TO CREATE BUCKETS USING CLI ************************************************
+
+1)  Create user get "secret key id" & "secret access key"
+
+2)  aws configure to login user for s3 work
+
+3)  List all S3 Buckets
+    aws s3 ls
+
+4)  Create S3 Bucket
+    aws s3 mb s3://yourbucketname    
+
+5)  Remove S3 Bucket
+    aws s3 rb s3://yourbucketname (Make sure this bucket is empty - bucket can't be deleted if there is any items into it)
+
+6)  Sync local desktop files into s3 bucket
+    aws s3 sync . s3://yourbucketname       (Sync used to copy the folders, cp used to copy files)
+
+7)  Sync S3 bucket items to local desktop
+    aws s3 sync s3://yourbucketname .       (Sync used to copy the folders, cp used to copy files)

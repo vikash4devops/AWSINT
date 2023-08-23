@@ -1,0 +1,24 @@
+********************************************************************** THEORY ********************************************************************************
+
+1) STAND BY STATE -> when an EC2 instance is attached with any ASG and want to make it out of it (not detached or terminate) for a while for may be updating some packages or whatever reason, it is on as "STAND BY STATE", in this case no load will be given to this instance, but its bill will be counted
+ 
+
+2) AUTO-SCALING POLICY -> there are 2 types of auto scaling policies -> (i) Manual Policy, (ii) Dynamic Policy
+
+  * Dynamic Policy -> 3 Types of Dynamic Policies -> (a) Target Tracking Policy, (b) Simple Scaling Policy, (c) Step Scaling Policy, (d) Cyclic/Schedule Scaling Policies
+
+    * (a) Target Tracking Policy -> here we define the average of CPU UTILIZATION, eg -> 70% UTILIZATION (stability) defined and we have 4 EC2 instances, it means now CPU UTILIZATION can't exceed more than 70%, if this happens it will create a new EC2 instance and maintain the defined 70% of UTILIZATION, same if EC2 instances UTILIZATION descrease than 70%, it will delete other instances and make it maintain for 70%.
+    
+    * (b) Simple Scaling Policy  -> here we define the numbers of EC2 instances ( MIN & MAX no. ) as per CPU UTILIZATION, eg -> we say ADD 2 more instances if 80% of UTILIZATION exceed, so it will ADD 2 more instances after defined UTILIZATION wheather it requires only 1, but it will create 2 instances as we defined as 2, and same it will not cross the max no. of instances as well, if we defined 10 max instances then at any condition it will not cross that no of instances.
+    
+    * (c) Step Scaling Policy    -> here we define the numbers of EC2 instances from STEP BY STEP UTILIZATION, eg -> we say if UTILIZATION is 70%-80% ADD 1 more instance and so on (same fro descreasing the instances), here it use warm up time-> it means if new instances are taking xx seconds or minutes for being ready it will take only that time, not as we define the cool time (300 sec) for other types of policies
+    
+    * (d) Cyclic/Schedule Scaling Policies -> it will auto ADD the numbers of instances by predict the HISTORIC records that when it needs to ADD the instances and reduce the instances, it creates on its own, or we can even set the Schedule for increasing or descreasing the instances.
+
+
+
+********************************************************************** LAB ********************************************************************************
+
+1) LAUNCH CONFIGURATION = (Auto Scaling->Lauch Configuration) Very first need to create Lauch Configuration, here we mention what types of EC2-instances we got to add while auto-scaling works.
+
+2) CREATE AUTO SCALING GROUP = (Auto Scaling->Auto Scaling Groups) and now create ASG with select the created Configuration.

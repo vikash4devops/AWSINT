@@ -1,0 +1,21 @@
+************************************************* 2 VPC CONNECTIONS IN ELASTIC LOAD BALANCER ****************************************
+
+Important :- Read the Note before creating VPC.
+
+1)  Create 2 VPC -> create with different CIDR ranges (VPC Peering is not allowed within same CIDR ranges).
+2)  Create Subnet -> while creating subnets select different AZs (atleast 2 different AZs must be available for ELB of main VPC)
+3)  Create VPC Peering -> set first VPC (main vpc) as "requester" and other as "accepter"
+4)  Connect both VPC CIDR Block in both VPC Route Table
+    a) edit route table -> add other peered vpc cidr block -> TARGET (vpc peering) -> select VPC Peering id
+    b) do for both VPC route table
+    
+5) Create ELB -> while creating TARGET GROUP, there is option of TARGET TYPE select IP there
+6) Register Targets in TG: 
+    a) There will be one main Network VPC (selected), put the private IPs of instance machine, whose gonna be targeted for ELB and click to "Add to List" Button. 
+    b) For other VPC, select "other private IP address" in Network and put the other VPC instance machine private IP.   
+
+Note :- Below are the Allowed ranges of IPs for ELB in TG, so create VPC CIDR ranges as given below accordingly.
+        10.0.0.0/xx
+        172.16.0.0/x
+        192.168.0.0/x
+        100.64.0.0/x
